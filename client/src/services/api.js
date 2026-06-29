@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:5000/api";
 
 
 // ================= LOGIN =================
@@ -158,7 +160,7 @@ export const getTasks = async (projectId) => {
 export const createTask = async (taskData) => {
   const token = localStorage.getItem("accessToken");
 
-  const res = await fetch("http://localhost:5000/api/tasks", {
+  const res = await fetch(`${API_URL}/tasks`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -180,7 +182,7 @@ export const deleteTask = async (taskId) => {
 export const updateTask = async (taskId, data) => {
   const token = localStorage.getItem("accessToken");
 
-  const res = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
+  const res = await fetch(`${API_URL}/tasks/${taskId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -221,7 +223,7 @@ export const getUsers = async () => {
 export const addComment = async (text, taskId) => {
   const token = localStorage.getItem("accessToken");
 
-  const res = await fetch("http://localhost:5000/api/comments", {
+  const res = await fetch(`${API_URL}/comments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -237,7 +239,7 @@ export const getComments = async (taskId) => {
   const token = localStorage.getItem("accessToken");
 
   const res = await fetch(
-    `http://localhost:5000/api/comments/${taskId}`,
+    `${API_URL}/comments/${taskId}`,
     {
       headers: { Authorization: `Bearer ${token}` },
     }
@@ -249,7 +251,7 @@ export const getComments = async (taskId) => {
 export const getActivities = async () => {
   const token = localStorage.getItem("accessToken");
 
-  const res = await fetch("http://localhost:5000/api/activity", {
+  const res = await fetch(`${API_URL}/activity`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -262,7 +264,7 @@ export const getMe = async () => {
   const token = localStorage.getItem("accessToken");
 
   const res = await fetch(
-    "http://localhost:5000/api/users/me",
+    `${API_URL}/users/me`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

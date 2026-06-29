@@ -12,12 +12,12 @@ import userRoutes from "./routes/userRoutes.js";
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
+  origin: process.env.CLIENT_URL,
+  credentials: true,
 }));
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes); 
 app.use("/api/workspaces", workspaceRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
