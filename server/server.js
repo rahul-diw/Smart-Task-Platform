@@ -1,7 +1,6 @@
 import app from "./app.js";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import cors from "cors";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import { Server } from "socket.io";
 import commentRoutes from "./routes/commentRoutes.js";
@@ -13,7 +12,6 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 
 // CORS
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 // Routes
 app.use("/api/dashboard", dashboardRoutes);
@@ -34,7 +32,8 @@ const server = app.listen(PORT, () => {
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   },
 });
 
