@@ -11,20 +11,9 @@ import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://smart-task-platform-alpha.vercel.app",
-];
-
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     credentials: true,
   })
 );

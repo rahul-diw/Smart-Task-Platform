@@ -1,5 +1,7 @@
-import app from "./app.js";
 import dotenv from "dotenv";
+dotenv.config();
+
+import app from "./app.js";
 import connectDB from "./config/db.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import { Server } from "socket.io";
@@ -9,15 +11,11 @@ import path from "path";
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
 
-dotenv.config();
+
 
 // CORS
 
 // Routes
-app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/comments", commentRoutes);
-app.use("/api/activity", activityRoutes);
-app.use("/api/users", userRoutes);  
 app.use("/uploads", express.static("uploads"));
 
 const PORT = process.env.PORT || 5000;
