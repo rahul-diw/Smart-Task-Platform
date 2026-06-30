@@ -11,11 +11,31 @@ import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-}));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://smart-task-platform-alpha.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+
+
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
 
 app.use("/api/auth", authRoutes); 
 app.use("/api/workspaces", workspaceRoutes);
