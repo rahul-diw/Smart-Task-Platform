@@ -29,7 +29,7 @@ export const loginUser = async (email, password) => {
 export const refreshAccessToken = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
 
-  const res = await fetch(`${API_URL}/auth/refresh`, {
+  const res = await fetch(`${API_URL}/auth/refresh-token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
